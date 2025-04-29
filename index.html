@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minecraft Resource Hub</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    #searchBar {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    #filters {
+      margin-top: 10px;
+    }
+
+    #categoryFilter {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    #featured, #items-list {
+      padding: 20px;
+    }
+
+    .item-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 15px;
+      margin: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: inline-block;
+      width: calc(33% - 20px);
+      text-align: center;
+    }
+
+    .item-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .item-card h3 {
+      margin: 15px 0;
+    }
+
+    .item-card a {
+      display: inline-block;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .item-card a:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Minecraft Resource Hub</h1>
+    <input type="search" id="searchBar" placeholder="Search mods, skins, texture packs...">
+    <div id="filters">
+      <select id="categoryFilter">
+        <option value="all">All</option>
+        <option value="mods">Mods</option>
+        <option value="skins">Skins</option>
+        <option value="textures">Texture Packs</option>
+      </select>
+    </div>
+  </header>
+
+  <section id="featured">
+    <h2>Featured Mods</h2>
+    <div class="item-card" data-category="mods">
+      <img src="mod1-image.jpg" alt="Mod 1">
+      <h3>Super Mod 1.19</h3>
+      <p>This mod enhances your Minecraft world with awesome features!</p>
+      <a href="download-mod1.zip">Download</a>
+    </div>
+    <div class="item-card" data-category="textures">
+      <img src="mod2-image.jpg" alt="Mod 2">
+      <h3>Epic Texture Pack</h3>
+      <p>Transform the game’s visual style with this epic texture pack.</p>
+      <a href="download-mod2.zip">Download</a>
+    </div>
+  </section>
+
+  <section id="items-list">
+    <h2>All Mods</h2>
+    <div class="item-card" data-category="mods">
+      <img src="mod1-image.jpg" alt="Mod 1">
+      <h3>Mod Name 1</h3>
+      <p>A brief description of Mod 1.</p>
+      <a href="#">Download</a>
+    </div>
+    <div class="item-card" data-category="skins">
+      <img src="mod2-image.jpg" alt="Mod 2">
+      <h3>Skin Name 1</h3>
+      <p>A brief description of Skin 1.</p>
+      <a href="#">Download</a>
+    </div>
+    <div class="item-card" data-category="textures">
+      <img src="mod3-image.jpg" alt="Mod 3">
+      <h3>Texture Pack 1</h3>
+      <p>A brief description of Texture Pack 1.</p>
+      <a href="#">Download</a>
+    </div>
+    <!-- Add more items here -->
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Minecraft Resource Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const searchBar = document.getElementById('searchBar');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const itemCards = document.querySelectorAll('.item-card');
+
+    searchBar.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      itemCards.forEach((card) => {
+        const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+        const cardCategory = card.getAttribute('data-category').toLowerCase();
+        if (cardTitle.includes(query) && (categoryFilter.value === 'all' || cardCategory === categoryFilter.value)) {
+          card.style.display = 'inline-block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    categoryFilter.addEventListener('change', (e) => {
+      const selectedCategory = e.target.value.toLowerCase();
+      itemCards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category').toLowerCase();
+        if (selectedCategory === 'all' || cardCategory === selectedCategory) {
+          card.style.display = 'inline-block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
